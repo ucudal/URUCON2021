@@ -1,0 +1,563 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- This network was created in GeNIe Academic, which can be used for academic teaching and research purposes only -->
+<smile version="1.0" id="Network1" numsamples="1000" discsamples="10000">
+	<nodes>
+		<deterministic id="TravelledToHighCovidOrTuberculosisRegion">
+			<state id="Yes" />
+			<state id="No" />
+			<resultingstates>Yes</resultingstates>
+		</deterministic>
+		<cpt id="TravelledToHighCovid19PrevalenceRegion">
+			<state id="Yes" />
+			<state id="No" />
+			<probabilities>0.013 0.987</probabilities>
+		</cpt>
+		<decision id="ContactCOVID">
+			<state id="Yes" />
+			<state id="No" />
+		</decision>
+		<cpt id="InfluenzaVaccined">
+			<state id="Yes" />
+			<state id="No" />
+			<probabilities>0.492 0.508</probabilities>
+		</cpt>
+		<cpt id="Asthmatic">
+			<state id="Yes" />
+			<state id="No" />
+			<probabilities>0.078 0.922</probabilities>
+		</cpt>
+		<cpt id="Smoker">
+			<state id="Yes" />
+			<state id="No" />
+			<probabilities>0.104 0.896</probabilities>
+		</cpt>
+		<noisymax id="COVIDPneumonia">
+			<state id="Yes" />
+			<state id="No" />
+			<parents>Smoker</parents>
+			<strengths>0 1</strengths>
+			<parameters>0.228 0.772 0 1 0.01039999999999996 0.9896</parameters>
+		</noisymax>
+		<cpt id="Immunodeficiency">
+			<state id="Yes" />
+			<state id="No" />
+			<probabilities>0.03 0.97</probabilities>
+		</cpt>
+		<noisymax id="VaccinatedCOVID1">
+			<state id="Yes" />
+			<state id="No" />
+			<parameters>0.591 0.409</parameters>
+		</noisymax>
+		<noisymax id="VaccinatedCOVID2">
+			<state id="Yes" />
+			<state id="No" />
+			<parameters>0.503 0.497</parameters>
+		</noisymax>
+		<noisymax id="COVID19">
+			<state id="Yes" />
+			<state id="No" />
+			<parents>TravelledToHighCovid19PrevalenceRegion TravelledToHighCovidOrTuberculosisRegion ContactCOVID InfluenzaVaccined Immunodeficiency Asthmatic VaccinatedCOVID1 VaccinatedCOVID2</parents>
+			<strengths>0 1 0 1 0 1 0 1 0 1 0 1 0 1 0 1</strengths>
+			<parameters>0.002000000000000002 0.998 0 1 0.003900000000000015 0.9961 0 1 0.1419 0.8581 0 1 0.01200000000000001 0.988 0 1 0.09599999999999997 0.904 0 1 0.02190000000000003 0.9781 0 1 0.005476000000000036 0.994524 0 1 0.0007399999999999629 0.99926 0 1 0.01480000000000004 0.9852</parameters>
+		</noisymax>
+		<noisymax id="Influenza">
+			<state id="Yes" />
+			<state id="No" />
+			<parents>InfluenzaVaccined Smoker Immunodeficiency</parents>
+			<strengths>0 1 0 1 0 1</strengths>
+			<parameters>0.07250000000000001 0.9275 0 1 0.1899999999999999 0.8100000000000001 0 1 0.95 0.05000000000000004 0 1 0.145 0.855</parameters>
+		</noisymax>
+		<noisymax id="AntigenTest">
+			<state id="Yes" />
+			<state id="No" />
+			<parents>Influenza COVID19</parents>
+			<strengths>0 1 0 1</strengths>
+			<parameters>0.6 0.4 0 1 0.648 0.352 0 1 0.001000000000000001 0.999</parameters>
+		</noisymax>
+		<noisymax id="Tuberculosis">
+			<state id="Yes" />
+			<state id="No" />
+			<parents>Immunodeficiency Smoker TravelledToHighCovidOrTuberculosisRegion Asthmatic</parents>
+			<strengths>0 1 0 1 0 1 0 1</strengths>
+			<parameters>0.08150000000000002 0.9185 0 1 0.65 0.35 0 1 0.02000000000000002 0.98 0 1 0.304 0.696 0 1 2.7200000000005e-05 0.9999728</parameters>
+		</noisymax>
+		<noisymax id="CommonCold">
+			<state id="Yes" />
+			<state id="No" />
+			<parents>Smoker</parents>
+			<strengths>0 1</strengths>
+			<parameters>0.26 0.74 0 1 0.2301 0.7699</parameters>
+		</noisymax>
+		<noisymax id="PneumoniaOther">
+			<state id="Yes" />
+			<state id="No" />
+			<parents>Smoker Asthmatic Immunodeficiency</parents>
+			<strengths>0 1 0 1 0 1</strengths>
+			<parameters>0.01600000000000001 0.984 0 1 0.01200000000000001 0.988 0 1 0.53 0.47 0 1 0.004000000000000004 0.996</parameters>
+		</noisymax>
+		<noisymax id="Fever">
+			<state id="Yes" />
+			<state id="No" />
+			<parents>COVID19 Influenza CommonCold Tuberculosis COVIDPneumonia PneumoniaOther</parents>
+			<strengths>0 1 0 1 0 1 0 1 0 1 0 1</strengths>
+			<parameters>0.4299999999999999 0.5700000000000001 0 1 0.1799999999999999 0.8200000000000001 0 1 0.15 0.85 0 1 0.6 0.4 0 1 0.73 0.27 0 1 0.73 0.27 0 1 0.02900000000000003 0.971</parameters>
+		</noisymax>
+		<noisymax id="LungCancer">
+			<state id="Yes" />
+			<state id="No" />
+			<parents>Smoker Asthmatic</parents>
+			<strengths>0 1 0 1</strengths>
+			<parameters>0.15 0.85 0 1 0.09504000000000001 0.90496 0 1 0.06600000000000006 0.9339999999999999</parameters>
+		</noisymax>
+		<noisymax id="DryCough">
+			<state id="Yes" />
+			<state id="No" />
+			<parents>COVID19 CommonCold Tuberculosis LungCancer COVIDPneumonia PneumoniaOther</parents>
+			<strengths>0 1 0 1 0 1 0 1 0 1 0 1</strengths>
+			<parameters>0.5 0.5 0 1 0.46 0.54 0 1 0.78 0.22 0 1 0.45 0.55 0 1 0.5900000000000001 0.41 0 1 0.85 0.15 0 1 0.144 0.856</parameters>
+		</noisymax>
+		<noisymax id="Myalgia">
+			<state id="Yes" />
+			<state id="No" />
+			<parents>COVID19 Influenza</parents>
+			<strengths>0 1 0 1</strengths>
+			<parameters>0.36 0.64 0 1 0.36 0.64 0 1 0.167 0.833</parameters>
+		</noisymax>
+		<noisymax id="Dyspnea">
+			<state id="Yes" />
+			<state id="No" />
+			<parents>COVID19 Influenza Tuberculosis LungCancer COVIDPneumonia PneumoniaOther</parents>
+			<strengths>0 1 0 1 0 1 0 1 0 1 0 1</strengths>
+			<parameters>0.29 0.71 0 1 0.29 0.71 0 1 0.37 0.63 0 1 0.37 0.63 0 1 0.4199999999999999 0.5800000000000001 0 1 0.71 0.29 0 1 0.16 0.84</parameters>
+		</noisymax>
+		<cpt id="BrainTumor">
+			<state id="Yes" />
+			<state id="No" />
+			<probabilities>7.42e-05 0.9999258</probabilities>
+		</cpt>
+		<noisymax id="Cephalea">
+			<state id="Yes" />
+			<state id="No" />
+			<parents>COVID19 Influenza CommonCold COVIDPneumonia</parents>
+			<strengths>0 1 0 1 0 1 0 1</strengths>
+			<parameters>0.3400000000000001 0.6599999999999999 0 1 0.8 0.2 0 1 0.15 0.85 0 1 0.06000000000000005 0.9399999999999999 0 1 0.5 0.5</parameters>
+		</noisymax>
+		<noisymax id="Anosmia">
+			<state id="Yes" />
+			<state id="No" />
+			<parents>COVID19 BrainTumor</parents>
+			<strengths>0 1 0 1</strengths>
+			<parameters>0.52 0.48 0 1 0.27 0.73 0 1 0.09999999999999998 0.9</parameters>
+		</noisymax>
+		<noisymax id="ChestPain">
+			<state id="Yes" />
+			<state id="No" />
+			<parents>Influenza Tuberculosis LungCancer COVIDPneumonia PneumoniaOther</parents>
+			<strengths>0 1 0 1 0 1 0 1 0 1</strengths>
+			<parameters>0.13 0.87 0 1 0.4 0.6 0 1 0.27 0.73 0 1 0.22 0.78 0 1 0.4399999999999999 0.5600000000000001 0 1 0.01500000000000001 0.985</parameters>
+		</noisymax>
+		<noisymax id="PCR">
+			<state id="Yes" />
+			<state id="No" />
+			<parents>Influenza Tuberculosis COVID19</parents>
+			<strengths>0 1 0 1 0 1</strengths>
+			<parameters>0.98 0.02000000000000002 0 1 0.783 0.217 0 1 0.899 0.101 0 1 0.002000000000000002 0.998</parameters>
+		</noisymax>
+		<noisymax id="Myocarditis">
+			<state id="Yes" />
+			<state id="No" />
+			<parents>COVID19 Tuberculosis</parents>
+			<strengths>0 1 0 1</strengths>
+			<parameters>0.2 0.8 0 1 0.002000000000000002 0.998 0 1 0.000199999999999978 0.9998</parameters>
+		</noisymax>
+		<noisymax id="Rhinorrhea">
+			<state id="Yes" />
+			<state id="No" />
+			<parents>COVID19 Influenza CommonCold COVIDPneumonia</parents>
+			<strengths>0 1 0 1 0 1 0 1</strengths>
+			<parameters>0.06000000000000005 0.9399999999999999 0 1 0.73 0.27 0 1 0.72 0.28 0 1 0.26 0.74 0 1 0.1200000000000001 0.8799999999999999</parameters>
+		</noisymax>
+		<noisymax id="Fatigue">
+			<state id="Yes" />
+			<state id="No" />
+			<parents>Tuberculosis LungCancer COVIDPneumonia PneumoniaOther BrainTumor</parents>
+			<strengths>0 1 0 1 0 1 0 1 0 1</strengths>
+			<parameters>0.6799999999999999 0.32 0 1 0.3400000000000001 0.6599999999999999 0 1 0.08999999999999997 0.91 0 1 0.9 0.09999999999999998 0 1 0.15 0.85 0 1 0.219 0.781</parameters>
+		</noisymax>
+		<noisymax id="Dysgeusia">
+			<state id="Yes" />
+			<state id="No" />
+			<parents>COVID19 BrainTumor</parents>
+			<strengths>0 1 0 1</strengths>
+			<parameters>0.4399999999999999 0.5600000000000001 0 1 0.27 0.73 0 1 0.04999999999999993 0.9500000000000001</parameters>
+		</noisymax>
+		<noisymax id="RXScan">
+			<state id="Yes" />
+			<state id="No" />
+			<parents>PneumoniaOther Tuberculosis LungCancer COVIDPneumonia COVID19</parents>
+			<strengths>0 1 0 1 0 1 0 1 0 1</strengths>
+			<parameters>0.8 0.2 0 1 0.8 0.2 0 1 0.783 0.217 0 1 0.8 0.2 0 1 0.681 0.319 0 1 0.5899999999999999 0.4100000000000001</parameters>
+		</noisymax>
+		<noisymax id="HeadCTScan">
+			<state id="Yes" />
+			<state id="No" />
+			<parents>BrainTumor LungCancer</parents>
+			<strengths>0 1 0 1</strengths>
+			<parameters>0.65 0.35 0 1 0.65 0.35 0 1 0.65 0.35</parameters>
+		</noisymax>
+		<noisymax id="CProteinReactive">
+			<state id="Yes" />
+			<state id="No" />
+			<parents>Influenza Tuberculosis LungCancer COVIDPneumonia PneumoniaOther COVID19</parents>
+			<strengths>0 1 0 1 0 1 0 1 0 1 0 1</strengths>
+			<parameters>0.74 0.26 0 1 0.89 0.11 0 1 0.279 0.721 0 1 0.86 0.14 0 1 0.84 0.16 0 1 0.8636 0.1364 0 1 0.009999999999999898 0.9900000000000001</parameters>
+		</noisymax>
+		<noisymax id="AbnormalHemogram">
+			<state id="Yes" />
+			<state id="No" />
+			<parents>Influenza Tuberculosis COVID19</parents>
+			<strengths>0 1 0 1 0 1</strengths>
+			<parameters>0.6 0.4 0 1 0.675 0.325 0 1 0.83 0.17 0 1 0.13 0.87</parameters>
+		</noisymax>
+		<noisymax id="SmearMicroscopy">
+			<state id="Yes" />
+			<state id="No" />
+			<parents>Tuberculosis</parents>
+			<strengths>0 1</strengths>
+			<parameters>0.55 0.45 0 1 0.01000000000000001 0.99</parameters>
+		</noisymax>
+		<noisymax id="RenalFailure">
+			<state id="Yes" />
+			<state id="No" />
+			<parents>COVID19</parents>
+			<strengths>0 1</strengths>
+			<parameters>0.05100000000000005 0.949 0 1 0.01000000000000001 0.99</parameters>
+		</noisymax>
+		<noisymax id="ChestCTScan">
+			<state id="Yes" />
+			<state id="No" />
+			<parents>LungCancer COVIDPneumonia COVID19</parents>
+			<strengths>0 1 0 1 0 1</strengths>
+			<parameters>0.889 0.111 0 1 0.83 0.17 0 1 0.97 0.03000000000000003 0 1 0.2399999999999999 0.7600000000000001</parameters>
+		</noisymax>
+	</nodes>
+	<cases>
+		<case name="CASO 1">
+			<evidence node="BrainTumor" state="Yes" />
+			<evidence node="PCR" state="No" />
+			<evidence node="Anosmia" state="Yes" />
+		</case>
+		<case name="CASO 2">
+			<evidence node="PCR" state="Yes" />
+		</case>
+		<case name="CASO 3">
+			<evidence node="PCR" state="No" />
+			<evidence node="SmearMicroscopy" state="Yes" />
+			<evidence node="RXScan" state="Yes" />
+			<evidence node="Dyspnea" state="Yes" />
+			<evidence node="DryCough" state="Yes" />
+		</case>
+		<case name="CASO 4">
+		</case>
+	</cases>
+	<extensions>
+		<genie version="1.0" app="GeNIe 3.0.6518.0 ACADEMIC" name="Network1">
+			<node id="Fever">
+				<name>Fever ( &gt; 38°)</name>
+				<interior color="e5f6f7" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>1041 822 1178 903</position>
+				<barchart active="true" width="172" height="64" />
+			</node>
+			<node id="DryCough">
+				<name>Dry Cough</name>
+				<interior color="e5f6f7" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>1234 822 1371 903</position>
+				<barchart active="true" width="172" height="64" />
+			</node>
+			<node id="Myalgia">
+				<name>Myalgia - Muscle Pain</name>
+				<interior color="e5f6f7" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>1473 996 1610 1077</position>
+				<barchart active="true" width="172" height="64" />
+			</node>
+			<node id="Dyspnea">
+				<name>Dyspnea</name>
+				<interior color="e5f6f7" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>816 999 953 1080</position>
+				<barchart active="true" width="172" height="64" />
+			</node>
+			<node id="Cephalea">
+				<name>Cephalea - Headache</name>
+				<interior color="e5f6f7" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>944 911 1081 992</position>
+				<barchart active="true" width="172" height="64" />
+			</node>
+			<node id="Anosmia">
+				<name>Anosmia - Smell Loss</name>
+				<interior color="e5f6f7" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>1144 911 1281 992</position>
+				<barchart active="true" width="172" height="64" />
+			</node>
+			<node id="Tuberculosis">
+				<name>Tuberculosis</name>
+				<interior color="e5f6f7" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>1482 331 1619 412</position>
+				<barchart active="true" width="172" height="64" />
+			</node>
+			<node id="ChestPain">
+				<name>Chest Pain</name>
+				<interior color="e5f6f7" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>1353 910 1496 991</position>
+				<barchart active="true" width="172" height="64" />
+			</node>
+			<node id="PCR">
+				<name>PCR</name>
+				<interior color="e5f6f7" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>422 450 565 531</position>
+				<barchart active="true" width="172" height="64" />
+			</node>
+			<node id="LungCancer">
+				<name>Lung Cancer</name>
+				<interior color="e5f6f7" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>1269 332 1412 413</position>
+				<barchart active="true" width="172" height="64" />
+			</node>
+			<node id="Myocarditis">
+				<name>Myocarditis</name>
+				<interior color="e5f6f7" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>1459 820 1602 901</position>
+				<barchart active="true" width="172" height="64" />
+			</node>
+			<node id="BrainTumor">
+				<name>Brain Tumor</name>
+				<interior color="e5f6f7" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>1267 421 1410 502</position>
+				<barchart active="true" width="172" height="64" />
+			</node>
+			<node id="Immunodeficiency">
+				<name>Immunodeficiency</name>
+				<interior color="e5f6f7" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>839 429 1010 493</position>
+				<barchart active="true" width="168" height="64" />
+			</node>
+			<node id="Influenza">
+				<name>Influenza/Seasonal Flu</name>
+				<interior color="e5f6f7" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>1738 713 1881 794</position>
+				<barchart active="true" width="172" height="64" />
+			</node>
+			<node id="CommonCold">
+				<name>Common Cold</name>
+				<interior color="e5f6f7" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>1472 421 1615 502</position>
+				<barchart active="true" width="172" height="64" />
+			</node>
+			<node id="Rhinorrhea">
+				<name>Rhinorrhea</name>
+				<interior color="e5f6f7" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>1025 1000 1168 1081</position>
+				<barchart active="true" width="172" height="64" />
+			</node>
+			<node id="Fatigue">
+				<name>Fatigue</name>
+				<interior color="e5f6f7" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>1582 910 1725 991</position>
+				<barchart active="true" width="172" height="64" />
+			</node>
+			<node id="PneumoniaOther">
+				<name>Pneumonia (Other)</name>
+				<interior color="e5f6f7" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>1055 333 1198 414</position>
+				<barchart active="true" width="172" height="64" />
+			</node>
+			<node id="Dysgeusia">
+				<name>Dysgeusia</name>
+				<interior color="e5f6f7" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>821 821 964 902</position>
+				<barchart active="true" width="172" height="64" />
+			</node>
+			<node id="AntigenTest">
+				<name>Antigen Test</name>
+				<interior color="e5f6f7" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>1733 553 1876 634</position>
+				<barchart active="true" width="172" height="64" />
+			</node>
+			<node id="RXScan">
+				<name>RX Scan</name>
+				<interior color="e5f6f7" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>424 533 567 614</position>
+				<barchart active="true" width="172" height="64" />
+			</node>
+			<node id="HeadCTScan">
+				<name>Head CT-Scan</name>
+				<interior color="e5f6f7" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>1743 799 1886 880</position>
+				<barchart active="true" width="172" height="64" />
+			</node>
+			<node id="Smoker">
+				<name>Smoker</name>
+				<interior color="e5f6f7" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>1062 422 1205 503</position>
+				<barchart active="true" width="172" height="64" />
+			</node>
+			<node id="CProteinReactive">
+				<name>C-Protein Reactive</name>
+				<interior color="e5f6f7" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>428 697 571 778</position>
+				<barchart active="true" width="172" height="64" />
+			</node>
+			<node id="AbnormalHemogram">
+				<name>Abnormal Hemogram</name>
+				<interior color="e5f6f7" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>428 785 571 866</position>
+				<barchart active="true" width="172" height="64" />
+			</node>
+			<node id="TravelledToHighCovidOrTuberculosisRegion">
+				<name>Travelled to High Covid OR TB</name>
+				<interior color="e5f6f7" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>1175 227 1318 308</position>
+				<barchart active="true" width="172" height="64" />
+			</node>
+			<node id="TravelledToHighCovid19PrevalenceRegion">
+				<name>Travelled To Covid19 Region</name>
+				<interior color="e5f6f7" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>972 228 1115 309</position>
+				<barchart active="true" width="172" height="64" />
+			</node>
+			<node id="ContactCOVID">
+				<name>Contact with COVID +</name>
+				<interior color="e5f6f7" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>771 228 914 309</position>
+				<barchart active="true" width="172" height="64" />
+			</node>
+			<node id="InfluenzaVaccined">
+				<name>Vaccined for Influenza</name>
+				<interior color="e5f6f7" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>1736 632 1879 713</position>
+				<barchart active="true" width="172" height="64" />
+			</node>
+			<node id="Asthmatic">
+				<name>Asthmatic</name>
+				<interior color="e5f6f7" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>1402 227 1545 308</position>
+				<barchart active="true" width="172" height="64" />
+			</node>
+			<node id="SmearMicroscopy">
+				<name>Smear microscopy</name>
+				<interior color="e5f6f7" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>429 865 572 946</position>
+				<barchart active="true" width="172" height="64" />
+			</node>
+			<node id="RenalFailure">
+				<name>Renal Failure</name>
+				<interior color="e5f6f7" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>1249 998 1392 1079</position>
+				<barchart active="true" width="172" height="64" />
+			</node>
+			<node id="COVIDPneumonia">
+				<name>COVID Pneumonia</name>
+				<interior color="e5f6f7" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>859 333 996 414</position>
+				<barchart active="true" width="172" height="64" />
+			</node>
+			<node id="ChestCTScan">
+				<name>Chest CT-Scan</name>
+				<interior color="e5f6f7" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>428 616 571 697</position>
+				<barchart active="true" width="172" height="64" />
+			</node>
+			<node id="COVID19">
+				<name>COVID19</name>
+				<interior color="e5f6f7" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>658 333 795 414</position>
+				<barchart active="true" width="172" height="64" />
+			</node>
+			<node id="VaccinatedCOVID2">
+				<name>Fully vaccinated with Pfizer</name>
+				<interior color="e5f6f7" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>1734 471 1877 552</position>
+				<barchart active="true" width="194" height="64" />
+			</node>
+			<node id="VaccinatedCOVID1">
+				<name>Vaccinated with Pfizer (1st dose)</name>
+				<interior color="e5f6f7" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>1736 397 1879 478</position>
+				<barchart active="true" width="198" height="64" />
+			</node>
+		</genie>
+	</extensions>
+</smile>
