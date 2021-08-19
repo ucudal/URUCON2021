@@ -11,5 +11,5 @@ Artificial Intelligence, Clinical Decision Support Systems, Bayesian Networks, C
 ## Index
 
 - [/CDSS Bayesian Network](./cdss%20bayesian%20network/)
-  - [GeNIe Bayesian Network (v1)](cdss%20bayesian%20network/bayesian_network_v1.xdsl)
+  - [GeNIe Bayesian Network (v2)](cdss%20bayesian%20network/bayesian_network.xdsl)
 - [/docs](./docs/)
